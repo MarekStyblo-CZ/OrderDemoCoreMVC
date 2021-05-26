@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrderDemoCoreMVC.Controllers
 {
-    public class HomeController : Controller
+    public class Orders2Controller : Controller
     {
         public IActionResult Index()
         {
