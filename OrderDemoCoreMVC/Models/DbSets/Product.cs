@@ -16,6 +16,7 @@ namespace OrderDemoCoreMVC.Models.DbSets
         //Attr
 
         public int Code { get; set; }
+        [Required]
         public string Name { get; set; }
         public float Price { get; set; }
 

@@ -15,7 +15,9 @@ namespace OrderDemoCoreMVC.Models.DbSets
         public List<OrderItem> OderItems { get; set; }
 
         //Attr
+        [Required]
         public string CustomerName { get; set; }
+        [Required]
         public string CustomerAddress { get; set; }
         public DateTime Created { get; set; }
     }
