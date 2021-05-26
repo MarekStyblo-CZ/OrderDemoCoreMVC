@@ -31,7 +31,7 @@ namespace OrderDemoCoreMVC.Data
                 .WithOne(oi => oi.Product)
                 .IsRequired()
                 .HasForeignKey(oi => oi.ProductId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             //1:N
             modelBuilder.Entity<Order>()
