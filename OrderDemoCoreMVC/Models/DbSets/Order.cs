@@ -12,7 +12,7 @@ namespace OrderDemoCoreMVC.Models.DbSets
         public int Id { get; set; }
 
         //Relations
-        public List<OrderItem> OderItem { get; set; }
+        public List<OrderItem> OderItems { get; set; }
 
         //Attr
         public string CustomerName { get; set; }
