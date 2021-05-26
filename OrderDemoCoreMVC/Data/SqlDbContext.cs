@@ -41,7 +41,7 @@ namespace OrderDemoCoreMVC.Data
                 .HasForeignKey(oi => oi.OrderId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            //SeedDb(modelBuilder);
+            SeedDb(modelBuilder);
 
         }
 
