@@ -1,6 +1,49 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model OrderDemoCoreMVC.ViewModels.ProductsOverviewVM
+
 @{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<p>Products</p>
+
+<head>
+
+</head>
+
+@*inline css style definition just for this page*@
+<style>
+    th, td {
+        border: 1px solid black;
+    }
+</style>
+
+<body>
+    <h1>Přehled Produktů</h1>
+
+    <div>
+        <a href="@Url.Action("Create","Products", null)" class="btn btn-primary">Přidat produkt</a><br /><br />
+
+        <br />
+        <table style="">
+            <tr>
+                <th>Id</th>
+                <th>Kód produktu</th>
+                <th>Název produktu</th>
+                <th>Cena</th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Code</td>
+                    <td>@product.Name</td>
+                    <td>@product.Price</td>
+                    <td><a href="@Url.Action("Update","Products", new { productId = product.Id })" class="btn-sm btn-warning">Změnit</a><br /><br /></td>
+                    <td><a href="@Url.Action("Delete","Products", new { productId = product.Id })" class="btn-sm btn-danger">Smazat</a><br /><br /></td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>

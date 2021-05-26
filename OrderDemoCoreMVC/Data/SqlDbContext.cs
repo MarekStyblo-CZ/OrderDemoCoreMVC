@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace OrderDemoCoreMVC.Data
 {
-    public class SqlDbContext : DbContext
+    public class SqlDbContext : DbContext, IDisposable
     {
         public SqlDbContext(DbContextOptions<SqlDbContext> options)
             : base(options)
@@ -68,6 +68,13 @@ namespace OrderDemoCoreMVC.Data
                 new OrderItem { Id = 1, OrderId=1, ProductId=1, Price=7600.5f, Quantity=1 },
                 new OrderItem { Id = 2, OrderId=2, ProductId=2, Price=9800.6f, Quantity=1 }
             });
+        }
+
+        public override void Dispose()
+        {
+            //#todo
+            //this.Dispose();
+            //GC.SuppressFinalize(this);
         }
 
     }
