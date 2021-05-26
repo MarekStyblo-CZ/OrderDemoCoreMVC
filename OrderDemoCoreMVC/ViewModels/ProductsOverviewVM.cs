@@ -10,6 +10,5 @@ namespace OrderDemoCoreMVC.ViewModels
         {
             this.Products = products;
         }
-
     }
 }

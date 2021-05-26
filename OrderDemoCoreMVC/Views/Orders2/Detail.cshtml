@@ -1,0 +1,104 @@
+﻿@model OrderDemoCoreMVC.ViewModels.OrderVM
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*inline css style definition just for this page*@
+<style>
+    th, td {
+        border: 1px solid black;
+    }
+</style>
+
+<body>
+    <h1>Detail objednávky</h1>
+    <br />
+    <br />
+
+    <h3>Hlavička</h3>
+    <hr />
+    <div class="form-group row">
+        <div class="form-group row">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.CustomerAddress, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CustomerAddress, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.CustomerAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Created, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.Created, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+        <div class="form-group row">
+            <div class="col-md-2">
+                @Html.Label("Celková cena")
+            </div>
+            <div class="col-md-10">
+                <b>@Html.Label(Model.OrderItems.Sum(oi => oi.Quantity * oi.Price).ToString())</b>
+            </div>
+        </div>
+        <hr />
+
+        <h3>Položky objednávky</h3>
+        <table style="">
+            <tr>
+                <th>Id položky</th>
+                <th>Kód produktu</th>
+                <th>Název produktu</th>
+                <th>Množství</th>
+                <th>Cena</th>
+            </tr>
+
+            @foreach (var orderItem in Model.OrderItems)
+            {
+                <tr>
+                    <td>@orderItem.Id</td>
+                    <td>@orderItem.Product.Code</td>
+                    <td>@orderItem.Product.Name</td>
+                    <td>@orderItem.Quantity</td>
+                    <td>@orderItem.Price</td>
+                </tr>
+            }
+        </table>
+
+
+        <div class="form-group row"></div>
+        <div class="form-group row"></div>
+
+        <hr />
+
+        <div class="form-group row">
+            <div class="col-md-2">
+                <a href="@Url.Action("Index", "Orders2", null)" class="btn btn-dark">Zpět</a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+
+
+

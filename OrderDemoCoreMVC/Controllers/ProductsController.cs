@@ -12,8 +12,9 @@ namespace OrderDemoCoreMVC.Controllers
         public ProductsController(SqlDbContext sqlDbContext)
         {
             this._productService = new ProductService(sqlDbContext);
-
         }
+
+        [HttpGet]
         public IActionResult Index()
         {
             return View(new ProductsOverviewVM(_productService.GetAll()));
@@ -42,6 +43,8 @@ namespace OrderDemoCoreMVC.Controllers
         }
 
         // Probably better user experience would be 2 level confirmation of item delete (1st show detailed item info -> 2nd delete)
+        //#todo Another think is that product is restricted to be deleted when it is on OrderItem - would be nice to show better msg 
+
         [HttpGet]
         public IActionResult Delete(int productId)
         {
@@ -71,6 +74,5 @@ namespace OrderDemoCoreMVC.Controllers
             else
                 return View(vm);
         }
-
     }
 }

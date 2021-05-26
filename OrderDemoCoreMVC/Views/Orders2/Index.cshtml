@@ -1,6 +1,53 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model OrderDemoCoreMVC.ViewModels.OrdersOverviewVM
+
 @{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<p>Orders</p>
+
+<head>
+
+</head>
+
+@*inline css style definition just for this page*@
+<style>
+    th, td {
+        border: 1px solid black;
+    }
+</style>
+
+<body>
+    <h1>Přehled Objednávek</h1>
+
+    <div>
+        <a href="@Url.Action("Create","Orders2", null)" class="btn btn-primary">Vytvořit objednávku</a><br /><br />
+
+        <br />
+        <table style="">
+            <tr>
+                <th></th>
+                <th>Id</th>
+                <th>Jméno zákazníka</th>
+                <th>Adresa zákazníka</th>
+                <th>Vytvořeno</th>
+                <th>Celková cena</th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            @foreach (var order in Model.Orders)
+            {
+                <tr>
+                    <td><a href="@Url.Action("Detail","Orders2", new { orderId = order.Id })" class="btn-sm btn-info">Detail</a><br /><br /></td>
+                    <td>@order.Id</td>
+                    <td>@order.CustomerName</td>
+                    <td>@order.CustomerAddress</td>
+                    <td>@order.Created</td>
+                    <td>@order.OderItems.Sum(oi => oi.Quantity * oi.Price)</td>
+                    @*<td><a href="@Url.Action("Update","Orders2", new { orderId = order.Id })" class="btn-sm btn-warning">Změnit</a><br /><br /></td>*@
+                    <td><a href="@Url.Action("Delete","Orders2", new { orderId = order.Id })" class="btn-sm btn-danger">Smazat</a><br /><br /></td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>

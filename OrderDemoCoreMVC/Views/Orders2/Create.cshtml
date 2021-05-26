@@ -1,0 +1,102 @@
+﻿@model OrderDemoCoreMVC.ViewModels.OrderVM
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*inline css style definition just for this page*@
+<style>
+    th, td {
+        border: 1px solid black;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <body>
+        <h1>Vytvoření objednávky</h1>
+        <br />
+        <br />
+
+        <h3>Hlavička</h3>
+        <hr />
+        <div class="form-group row">
+            <div class="form-group row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.CustomerAddress, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustomerAddress, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustomerAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Created, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Created, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <hr />
+
+            <h3>Položky objednávky</h3>
+
+            @Html.HiddenFor(model => model.OrderItemErr)
+            @Html.ValidationMessageFor(model => model.OrderItemErr, "", new { @class = "text-danger" })
+            <table style="">
+                <tr>
+                    <th>Produkt</th>
+                    <th>Množství</th>
+                </tr>
+
+                @for (int i = 0; i < Model.SelectedProducts.Count(); i++)
+                {
+                    <tr>
+                        <td>@Html.DropDownListFor(model => Model.SelectedProducts[i].Id, Model.ProductOptions, htmlAttributes: new { @class = "form-control" })</td>
+                        <td> @Html.EditorFor(model => Model.SelectedProducts[i].Quantity, new { htmlAttributes = new { @class = "form-control" } })</td>
+                    </tr>
+                }
+
+            </table>
+
+
+            <div class="form-group row"></div>
+            <div class="form-group row"></div>
+
+            <hr />
+
+            <div class="form-group row">
+                <div class="col-md-2">
+                    <a href="@Url.Action("Index", "Orders2", null)" class="btn btn-dark">Zpět</a>
+                </div>
+
+                <div class="col-md-5">
+                    <button class="btn btn-primary" type="submit">Vytvořit</button>
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+}
+
+
+
+
